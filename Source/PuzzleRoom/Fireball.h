@@ -6,6 +6,10 @@
 #include "GameFramework/Actor.h"
 #include "Fireball.generated.h"
 
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnFireballSpawnedSignature, UNiagaraSystem*, TrailFX, USphereComponent*, AttachComponent);
+
+
 UCLASS()
 class PUZZLEROOM_API AFireball : public AActor
 {
@@ -23,6 +27,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(BlueprintAssignable)
+	FOnFireballSpawnedSignature OnFireballSpawned;
+
 	void ThrowToDirection(const FVector& ShootDirection);
 
 	float GetDamage();
@@ -35,15 +42,16 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Fireball")
 	float Damage = 30.f;
 
-	UPROPERTY(VisibleDefaultsOnly, Category = "Fireball")
+	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
 	class USphereComponent* CollisionComp;
 
-	UPROPERTY(VisibleDefaultsOnly, Category = "Fireball")
+	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
 	class UProjectileMovementComponent* ProjectileMovementComp;
 
-	UPROPERTY(VisibleDefaultsOnly, Category = "Fireball")
+	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
 	UStaticMeshComponent* ProjectileMeshComp;
 
-
+	UPROPERTY(EditAnywhere, Category = "Fireball")
+	class UNiagaraSystem* FireTrail;
 
 };

@@ -2,6 +2,8 @@
 
 #include "FireballMachine.h"
 #include "Fireball.h"
+#include "NiagaraFunctionLibrary.h"
+#include "Components/SphereComponent.h"
 
 
 //TODO: Player takes damage through logs.
@@ -71,9 +73,15 @@ void AFireballMachine::ThrowFireball()
 			AFireball* Fireball = World->SpawnActor<AFireball>(FireballClass, BarrelLocation, GetActorRotation(), SpawnParams);
 			if (Fireball)
 			{
+				Fireball->OnFireballSpawned.AddUniqueDynamic(this, &AFireballMachine::OnFireballSpawned);
 				FVector IgnitionDirection = GetActorRotation().Vector();
 				Fireball->ThrowToDirection(IgnitionDirection);
 			}
 		}
 	}
+}
+
+void AFireballMachine::OnFireballSpawned(UNiagaraSystem* TrailFX, USphereComponent* AttachComp)
+{
+	UNiagaraFunctionLibrary::SpawnSystemAttached(TrailFX, AttachComp, NAME_None, AttachComp->GetComponentLocation(), FRotator(0.f), EAttachLocation::KeepRelativeOffset, true);
 }

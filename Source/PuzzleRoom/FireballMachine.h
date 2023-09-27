@@ -28,6 +28,9 @@ public:
 	UFUNCTION()
 	void ThrowFireball();
 
+	UFUNCTION()
+	void OnFireballSpawned(UNiagaraSystem* TrailFX, class USphereComponent* AttachComp);
+
 private:
 
 	float InitialCooldown = 0.f;

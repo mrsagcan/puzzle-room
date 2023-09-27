@@ -11,28 +11,22 @@ AFireball::AFireball()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	if (!RootComponent)
-	{
-		RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("ProjectileSceneComponent"));
-	}
-	if (!CollisionComp)
-	{
-		CollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
-		CollisionComp->InitSphereRadius(15.0f);
-		RootComponent = CollisionComp;
-		CollisionComp->OnComponentHit.AddDynamic(this, &AFireball::OnHit);
-	}
-	if (!ProjectileMovementComp)
-	{
-		ProjectileMovementComp = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
-		ProjectileMovementComp->SetUpdatedComponent(CollisionComp);
-		ProjectileMovementComp->bRotationFollowsVelocity = true;
-	}
-	if (!ProjectileMeshComp)
-	{
-		ProjectileMeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ProjectileMeshComponent"));
-		ProjectileMeshComp->SetupAttachment(RootComponent);
-	}
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("ProjectileSceneComponent"));
+
+	CollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
+	CollisionComp->InitSphereRadius(15.0f);
+	RootComponent = CollisionComp;
+	CollisionComp->OnComponentHit.AddDynamic(this, &AFireball::OnHit);
+
+
+	ProjectileMovementComp = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
+	ProjectileMovementComp->SetUpdatedComponent(CollisionComp);
+	ProjectileMovementComp->bRotationFollowsVelocity = true;
+
+
+	ProjectileMeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ProjectileMeshComponent"));
+	ProjectileMeshComp->SetupAttachment(RootComponent);
+
 
 	InitialLifeSpan = 2.f;
 
@@ -54,6 +48,7 @@ void AFireball::Tick(float DeltaTime)
 void AFireball::ThrowToDirection(const FVector& ShootDirection)
 {
 	ProjectileMovementComp->Velocity = ShootDirection;
+	OnFireballSpawned.Broadcast(FireTrail, CollisionComp);
 }
 
 float AFireball::GetDamage()
