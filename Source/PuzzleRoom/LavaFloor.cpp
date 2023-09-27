@@ -16,6 +16,9 @@ ALavaFloor::ALavaFloor()
 	BoxComp->OnComponentBeginOverlap.AddDynamic(this, &ALavaFloor::OnOverlapBegin);
 	BoxComp->OnComponentEndOverlap.AddDynamic(this, &ALavaFloor::OnOverlapEnd);
 
+	OutBoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("Out Collider"));
+	OutBoxComp->SetupAttachment(BoxComp);
+
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Lava Mesh"));
 	Mesh->SetupAttachment(BoxComp);
 }

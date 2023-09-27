@@ -37,7 +37,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Lerp")
 	float WaitDuration = 3.f;
 
-	UPROPERTY(EditAnywhere, Category = "Lerp", Meta = (MakeEditWidget = true))
+	UPROPERTY(EditAnywhere, Category = "Lerp", Meta = (MakeEditWidget = "true"))
 	FVector TargetOffset;
 
 	void MovePlatform(float DeltaTime);

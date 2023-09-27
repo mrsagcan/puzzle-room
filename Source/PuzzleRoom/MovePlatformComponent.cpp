@@ -56,7 +56,7 @@ void UMovePlatformComponent::UpdateEndLocation()
 {
 	ElapsedTime = 0;
 	StartLocation = GetOwner()->GetActorLocation();
-	EndLocation = StartLocation + TargetOffset;
+	EndLocation = StartLocation + TargetOffset * GetOwner()->GetActorScale();
 	ElapsedWaitTime = WaitDuration;
 }
 

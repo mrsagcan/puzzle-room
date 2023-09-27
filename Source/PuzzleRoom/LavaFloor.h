@@ -37,6 +37,9 @@ private:
 	class UBoxComponent* BoxComp;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
+	class UBoxComponent* OutBoxComp;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
 	UStaticMeshComponent* Mesh;
 
 	UPROPERTY(EditAnywhere, Category = "Damage Timer")
