@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "DamagingObject.h"
 #include "SpearTrap.generated.h"
 
 UCLASS()
-class PUZZLEROOM_API ASpearTrap : public AActor
+class PUZZLEROOM_API ASpearTrap : public ADamagingObject
 {
 	GENERATED_BODY()
 	

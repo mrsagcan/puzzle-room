@@ -3,7 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+
+#include "DamagingObject.h"
 #include "MovablePlatform.generated.h"
 
 UCLASS()

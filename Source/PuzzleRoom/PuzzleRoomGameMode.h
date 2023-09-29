@@ -13,6 +13,19 @@ class APuzzleRoomGameMode : public AGameModeBase
 
 public:
 	APuzzleRoomGameMode();
+
+	UFUNCTION()
+	void GameOver();
+
+	UFUNCTION()
+	void RestartLevel();
+
+protected:
+	virtual void BeginPlay() override;
+
+private:
+
+	class APuzzleRoomCharacter* PlayerPawn;
 };
 
 

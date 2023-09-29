@@ -43,6 +43,7 @@ void ALavaGeyser::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 	if (OtherActor == UGameplayStatics::GetPlayerPawn(GetWorld(), 0))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Player is hit by lava particles."));
+		GiveDamage();
 	}
 }
 

@@ -21,6 +21,7 @@ ALavaFloor::ALavaFloor()
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Lava Mesh"));
 	Mesh->SetupAttachment(BoxComp);
+
 }
 
 // Called when the game starts or when spawned
@@ -47,13 +48,15 @@ void ALavaFloor::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor
 		}
 		else
 		{
-			GetWorldTimerManager().SetTimer(LavaDamageTimer, this, &ALavaFloor::CalculateDamageTime, CallRate, true);
+			LavaDamageTimerDel.BindUFunction(this, TEXT("CalculateDamageTime"), OtherActor);
+			GetWorldTimerManager().SetTimer(LavaDamageTimer, LavaDamageTimerDel, CallRate, true);
 		}
 	}
 }
 
-void ALavaFloor::CalculateDamageTime()
+void ALavaFloor::CalculateDamageTime(AActor* OtherActor)
 {
+	GiveDamage();
 	UE_LOG(LogTemp, Warning, TEXT("Player took damage from lava."));
 }
 

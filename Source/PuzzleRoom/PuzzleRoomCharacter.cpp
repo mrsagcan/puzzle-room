@@ -7,8 +7,7 @@
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-
-
+#include "Kismet/GameplayStatics.h"
 //////////////////////////////////////////////////////////////////////////
 // APuzzleRoomCharacter
 
@@ -50,6 +49,7 @@ void APuzzleRoomCharacter::BeginPlay()
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
 	}
+
 
 }
 
@@ -108,3 +108,9 @@ bool APuzzleRoomCharacter::GetHasRifle()
 {
 	return bHasRifle;
 }
+
+void APuzzleRoomCharacter::ApplyDamage(float Damage)
+{
+	OnAppliedDamage.Broadcast(Damage);
+}
+

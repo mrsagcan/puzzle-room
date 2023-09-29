@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "DamagingObject.h"
 #include "LavaFloor.generated.h"
 
 UCLASS()
-class PUZZLEROOM_API ALavaFloor : public AActor
+class PUZZLEROOM_API ALavaFloor : public ADamagingObject
 {
 	GENERATED_BODY()
 	
@@ -22,8 +22,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	void CalculateDamageTime();
+	
+	UFUNCTION()
+	void CalculateDamageTime(AActor* OtherActor);
 
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -46,4 +47,5 @@ private:
 	float CallRate = 3.f;
 	
 	FTimerHandle LavaDamageTimer;
+	FTimerDelegate LavaDamageTimerDel;
 };

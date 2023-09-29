@@ -3,7 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+
+#include "DamagingObject.h"
 #include "Fireball.generated.h"
 
 
@@ -11,7 +12,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnFireballSpawnedSignature, UNiaga
 
 
 UCLASS()
-class PUZZLEROOM_API AFireball : public AActor
+class PUZZLEROOM_API AFireball : public ADamagingObject
 {
 	GENERATED_BODY()
 	
@@ -32,15 +33,10 @@ public:
 
 	void ThrowToDirection(const FVector& ShootDirection);
 
-	float GetDamage();
-
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 
 private:
-
-	UPROPERTY(EditAnywhere, Category = "Fireball")
-	float Damage = 30.f;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
 	class USphereComponent* CollisionComp;

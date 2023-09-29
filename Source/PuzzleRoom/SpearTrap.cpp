@@ -37,9 +37,11 @@ void ASpearTrap::Tick(float DeltaTime)
 
 void ASpearTrap::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Player is hit by spears."));
 	if (OtherActor == UGameplayStatics::GetPlayerPawn(GetWorld(), 0))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Player is hit by spears."));
+		GiveDamage();
 	}
 }
 

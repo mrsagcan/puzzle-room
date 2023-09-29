@@ -3,11 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+
+#include "DamagingObject.h"
 #include "LavaGeyser.generated.h"
 
 UCLASS()
-class PUZZLEROOM_API ALavaGeyser : public AActor
+class PUZZLEROOM_API ALavaGeyser : public ADamagingObject
 {
 	GENERATED_BODY()
 	

@@ -51,11 +51,6 @@ void AFireball::ThrowToDirection(const FVector& ShootDirection)
 	OnFireballSpawned.Broadcast(FireTrail, CollisionComp);
 }
 
-float AFireball::GetDamage()
-{
-	return Damage;
-}
-
 void AFireball::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
 {
 	if (OtherActor != this)
@@ -63,6 +58,7 @@ void AFireball::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPr
 		if (OtherActor == UGameplayStatics::GetPlayerPawn(GetWorld(), 0))
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Player is hit by fireball."));
+			GiveDamage();
 		}
 		Destroy();
 	}

@@ -7,6 +7,8 @@
 #include "InputActionValue.h"
 #include "PuzzleRoomCharacter.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAppliedDamagedSignature, float, Damage);
+
 class UInputComponent;
 class USkeletalMeshComponent;
 class USceneComponent;
@@ -64,6 +66,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Weapon)
 	bool GetHasRifle();
 
+	UFUNCTION()
+	void ApplyDamage(float Damage);
+
+	UPROPERTY(BlueprintAssignable)
+	FOnAppliedDamagedSignature OnAppliedDamage;
+
 protected:
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
@@ -81,7 +89,6 @@ public:
 	USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
-
 
 };
 
